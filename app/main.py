@@ -2,7 +2,7 @@ from __future__ import annotations
 
 
 class Animal:
-    alive = []
+    alive: list[Animal] = []
 
     def __init__(
             self,
@@ -20,13 +20,12 @@ class Animal:
 
 class Herbivore(Animal):
     def hide(self) -> bool:
-        self.hidden ^= True
+        self.hidden = not self.hidden
 
 
 class Carnivore(Animal):
     def bite(self, herbivore: Herbivore) -> None:
         if isinstance(herbivore, Herbivore) and not herbivore.hidden:
             herbivore.health -= 50
-        if isinstance(herbivore, Herbivore):
             if herbivore.health <= 0:
                 Animal.alive.remove(herbivore)
